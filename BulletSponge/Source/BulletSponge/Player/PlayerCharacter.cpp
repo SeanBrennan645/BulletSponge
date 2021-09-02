@@ -36,6 +36,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("LookSideways"), this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis(TEXT("LookUpDownRate"), this, &APlayerCharacter::LookUpDownRate);
 	PlayerInputComponent->BindAxis(TEXT("LookSidewaysRate"), this, &APlayerCharacter::LookSidewaysRate);
+	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 
 }
 
