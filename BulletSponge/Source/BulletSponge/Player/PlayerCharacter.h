@@ -33,7 +33,7 @@ private:
 	void LookSidewaysRate(float AxisValue);
 
 	UPROPERTY(EditAnywhere)
-		float RotationRate = 20.0f;
+		float RotationRate = 40.0f;
 	
 
 };
