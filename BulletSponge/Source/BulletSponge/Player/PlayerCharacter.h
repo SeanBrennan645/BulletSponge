@@ -31,9 +31,12 @@ private:
 	void MoveSideways(float AxisValue);
 	void LookUpDownRate(float AxisValue);
 	void LookSidewaysRate(float AxisValue);
+	void PlayerJump();
 
 	UPROPERTY(EditAnywhere)
 		float RotationRate = 40.0f;
+
+	bool CanDoubleJump = true;
 	
 
 };
