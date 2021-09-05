@@ -2,6 +2,9 @@
 
 
 #include "PlayerCharacter.h"
+#include "BulletSponge/Weapons/GunBase.h"
+#include "Components/CapsuleComponent.h"
+
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -16,6 +19,11 @@ void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	Gun = GetWorld()->SpawnActor<AGunBase>(GunClass);
+	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform);
+	Gun->SetOwner(this);
+	Health = MaxHealth;
+	Ammo = StartAmmo;
 }
 
 // Called every frame
@@ -37,7 +45,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("LookUpDownRate"), this, &APlayerCharacter::LookUpDownRate);
 	PlayerInputComponent->BindAxis(TEXT("LookSidewaysRate"), this, &APlayerCharacter::LookSidewaysRate);
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
-
+	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &APlayerCharacter::PullTrigger);
 }
 
 //MovementFunctions
@@ -59,4 +67,9 @@ void APlayerCharacter::LookUpDownRate(float AxisValue)
 void APlayerCharacter::LookSidewaysRate(float AxisValue)
 {
 	AddControllerYawInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
+}
+
+void APlayerCharacter::PullTrigger()
+{
+	Gun->PullTrigger();
 }

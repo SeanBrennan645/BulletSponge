@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
+class AGunBase;
+
 UCLASS()
 class BULLETSPONGE_API APlayerCharacter : public ACharacter
 {
@@ -21,6 +23,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void PullTrigger();
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,12 +34,25 @@ private:
 	void MoveSideways(float AxisValue);
 	void LookUpDownRate(float AxisValue);
 	void LookSidewaysRate(float AxisValue);
-	void PlayerJump();
 
 	UPROPERTY(EditAnywhere)
 		float RotationRate = 40.0f;
+	UPROPERTY(EditDefaultsOnly)
+		float MaxHealth = 100.0f;
+	UPROPERTY(EditDefaultsOnly)
+		float MaxAmmo = 10.0f;
 
-	bool CanDoubleJump = true;
-	
+	UPROPERTY(VisibleAnywhere)
+		float Health;
+	UPROPERTY(VisibleAnywhere)
+		float Ammo;
+	UPROPERTY(VisibleAnywhere)
+		float StartAmmo = 3.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<AGunBase> GunClass;
+
+	UPROPERTY()
+		AGunBase* Gun;
 
 };
