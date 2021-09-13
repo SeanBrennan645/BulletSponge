@@ -7,6 +7,7 @@
 #include "EnemyCharacter.generated.h"
 
 class AGunBase;
+class AEnemyProjectile;
 
 UCLASS()
 class BULLETSPONGE_API AEnemyCharacter : public ACharacter
@@ -41,5 +42,11 @@ private:
 
 	UPROPERTY()
 		AGunBase* Gun;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		USceneComponent* ProjectileSpawnPoint;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile Type", meta = (AllowPrivateAccess = "true"))
+		TSubclassOf<AEnemyProjectile> ProjectileClass;
 
 };

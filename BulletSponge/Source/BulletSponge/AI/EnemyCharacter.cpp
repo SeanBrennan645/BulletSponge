@@ -3,6 +3,7 @@
 
 #include "EnemyCharacter.h"
 #include "BulletSponge/Weapons/GunBase.h"
+#include "BulletSponge/Weapons/EnemyProjectile.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -10,7 +11,9 @@ AEnemyCharacter::AEnemyCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	
+	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Point"));
+	ProjectileSpawnPoint->SetupAttachment(this->GetMesh());
 }
 
 // Called when the game starts or when spawned
