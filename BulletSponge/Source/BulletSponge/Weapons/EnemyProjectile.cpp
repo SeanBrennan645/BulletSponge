@@ -19,17 +19,18 @@ AEnemyProjectile::AEnemyProjectile()
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
 
 	ProjectileMesh->OnComponentHit.AddDynamic(this, &AEnemyProjectile::OnHit);
+
+	ProjectileMovement->InitialSpeed = MovementSpeed;
+	ProjectileMovement->MaxSpeed = MovementSpeed;
+
+
+	InitialLifeSpan = 3.0f;
 }
 
 // Called when the game starts or when spawned
 void AEnemyProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	ProjectileMovement->InitialSpeed = MovementSpeed;
-	ProjectileMovement->MaxSpeed = MovementSpeed;
-
-	InitialLifeSpan = 3.0f;
 }
 
 void AEnemyProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
