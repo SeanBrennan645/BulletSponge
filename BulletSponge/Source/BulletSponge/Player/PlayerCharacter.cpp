@@ -71,5 +71,36 @@ void APlayerCharacter::LookSidewaysRate(float AxisValue)
 
 void APlayerCharacter::PullTrigger()
 {
-	Gun->PullTrigger();
+	if (Ammo > 0.0f)
+	{
+		Ammo--;
+		Gun->PullTrigger();
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Ammo is %f"), Ammo);
+}
+
+float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	UE_LOG(LogTemp, Error, TEXT("Player taking damage!!"));
+	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	if (Ammo < MaxAmmo)
+	{
+		Ammo += DamageToApply;
+		DamageToApply = 0.0f;
+		return DamageToApply;
+	}
+	else
+	{
+		DamageToApply = DamageToApply * 10.0f; // will need to remove magic number for damage scale to be editable
+		
+		if (DamageToApply > Health)
+			DamageToApply = Health;
+
+		Health -= DamageToApply;
+		UE_LOG(LogTemp, Warning, TEXT("Health is %f"), Health);
+
+		//add check if dead
+
+		return DamageToApply;
+	}
 }
