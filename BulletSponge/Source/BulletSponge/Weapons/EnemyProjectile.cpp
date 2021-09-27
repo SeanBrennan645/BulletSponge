@@ -13,12 +13,12 @@ AEnemyProjectile::AEnemyProjectile()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Projectile Mesh"));
-
+	ProjectileMesh->OnComponentHit.AddDynamic(this, &AEnemyProjectile::OnHit);
 	RootComponent = ProjectileMesh;
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
 
-	ProjectileMesh->OnComponentHit.AddDynamic(this, &AEnemyProjectile::OnHit);
+	
 
 	ProjectileMovement->InitialSpeed = MovementSpeed;
 	ProjectileMovement->MaxSpeed = MovementSpeed;
@@ -31,10 +31,13 @@ AEnemyProjectile::AEnemyProjectile()
 void AEnemyProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
 }
 
 void AEnemyProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	UE_LOG(LogTemp, Error, TEXT("OnHit called from projectile"))
 	AActor* MyOwner = GetOwner();
 	if (!MyOwner)
 		return;
