@@ -49,7 +49,7 @@ bool AGunBase::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 	FCollisionQueryParams Params;
 	Params.AddIgnoredActor(this);
 	Params.AddIgnoredActor(GetOwner());
-	return GetWorld()->LineTraceSingleByChannel(Hit, CameraLocation, End, ECollisionChannel::ECC_EngineTraceChannel1, Params);
+	return GetWorld()->LineTraceSingleByChannel(Hit, CameraLocation, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
 }
 
 AController* AGunBase::GetOwnerController() const
@@ -76,6 +76,7 @@ void AGunBase::PullTrigger()
 		AActor* HitActor = Hit.GetActor();
 		if (HitActor != nullptr)
 		{
+			UE_LOG(LogTemp, Error, TEXT("Actor was shot!"));
 			FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
 			AController* OwnerController = GetOwnerController();
 			if (OwnerController == nullptr)

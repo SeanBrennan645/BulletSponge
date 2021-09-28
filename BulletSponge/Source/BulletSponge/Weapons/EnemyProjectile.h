@@ -29,7 +29,7 @@ private:
 		TSubclassOf<UDamageType> DamageType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Move", meta = (AllowPrivateAccess = "true"))
-		float MovementSpeed = 1300.0f;
+		float MovementSpeed = 3300.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
 		float Damage = 1.0f;
 

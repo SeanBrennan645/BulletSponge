@@ -51,3 +51,16 @@ void AEnemyCharacter::PullTrigger()
 		TempProjectile->SetOwner(this);
 	}
 }
+
+float AEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Enemy has been shot!"));
+	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	DamageToApply = FMath::Min(Health, DamageToApply);
+	Health -= DamageToApply;
+	UE_LOG(LogTemp, Warning, TEXT("Enemy health is %f"), Health);
+
+	//Need to add functionality for when enemy is dead
+
+	return DamageToApply;
+}

@@ -43,6 +43,8 @@ private:
 		float MaxHealth = 100.0f;
 	UPROPERTY(EditDefaultsOnly)
 		float MaxAmmo = 10.0f;
+	UPROPERTY(EditDefaultsOnly)
+		float DamageTakenMultiplier = 10.0f;
 
 	UPROPERTY(VisibleAnywhere)
 		float Health;

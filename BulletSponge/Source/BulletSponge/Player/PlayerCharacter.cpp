@@ -81,7 +81,7 @@ void APlayerCharacter::PullTrigger()
 
 float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
-	UE_LOG(LogTemp, Error, TEXT("Player taking damage!!"));
+	//UE_LOG(LogTemp, Error, TEXT("Player taking damage!!"));
 	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 	if (Ammo < MaxAmmo)
 	{
@@ -91,13 +91,13 @@ float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const
 	}
 	else
 	{
-		DamageToApply = DamageToApply * 10.0f; // will need to remove magic number for damage scale to be editable
+		DamageToApply = DamageToApply * DamageTakenMultiplier; // will need to remove magic number for damage scale to be editable
 		
 		if (DamageToApply > Health)
 			DamageToApply = Health;
 
 		Health -= DamageToApply;
-		UE_LOG(LogTemp, Warning, TEXT("Health is %f"), Health);
+		//UE_LOG(LogTemp, Warning, TEXT("Player Health is %f"), Health);
 
 		//add check if dead
 
