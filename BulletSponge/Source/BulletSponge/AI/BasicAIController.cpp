@@ -4,6 +4,7 @@
 #include "BasicAIController.h"
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "BulletSponge/AI/EnemyCharacter.h"
 
 void ABasicAIController::BeginPlay()
 {
@@ -22,4 +23,13 @@ void ABasicAIController::BeginPlay()
 void ABasicAIController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+}
+
+bool ABasicAIController::IsDead() const
+{
+	AEnemyCharacter* ControlledCharacter = Cast<AEnemyCharacter>(GetPawn());
+	if (ControlledCharacter != nullptr)
+		return ControlledCharacter->IsDead();
+
+	return true;
 }

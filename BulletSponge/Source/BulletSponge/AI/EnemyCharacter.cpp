@@ -64,3 +64,11 @@ float AEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const&
 
 	return DamageToApply;
 }
+
+bool AEnemyCharacter::IsDead() const
+{
+	if (Health == 0.0f)
+		return true;
+	else
+		return false;
+}
