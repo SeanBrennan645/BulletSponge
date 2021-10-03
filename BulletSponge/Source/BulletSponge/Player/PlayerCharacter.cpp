@@ -76,7 +76,7 @@ void APlayerCharacter::PullTrigger()
 		Ammo--;
 		Gun->PullTrigger();
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Ammo is %f"), Ammo);
+	//UE_LOG(LogTemp, Warning, TEXT("Ammo is %f"), Ammo);
 }
 
 float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
@@ -103,4 +103,22 @@ float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const
 
 		return DamageToApply;
 	}
+}
+
+bool APlayerCharacter::IsDead() const
+{
+	if (Health == 0.0f)
+		return true;
+	else
+		return false;
+}
+
+float APlayerCharacter::GetHealthPercent() const
+{
+	return Health / MaxHealth;
+}
+
+float APlayerCharacter::GetAmmoPercent() const
+{
+	return Ammo / MaxAmmo;
 }
