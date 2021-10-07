@@ -23,6 +23,10 @@ void AKillEmAllGameMode::PawnKilled(APawn* PawnKilled)
 
 void AKillEmAllGameMode::EndGame(bool bIsPlayerWinner)
 {
-	//Need to add UI before setting up
+	for (AController* Controller : TActorRange<AController>(GetWorld()))
+	{
+		bool bIsWinner = Controller->IsPlayerController() == bIsPlayerWinner;
+		Controller->GameHasEnded(Controller->GetPawn(), bIsWinner);
+	}
 }
 

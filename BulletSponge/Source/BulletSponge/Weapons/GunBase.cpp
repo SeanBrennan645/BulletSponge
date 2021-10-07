@@ -45,7 +45,7 @@ bool AGunBase::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 	ShotDirection = -CameraRotation.Vector();
 
 	FVector End = CameraLocation + CameraRotation.Vector() * MaxRange;
-	DrawDebugCamera(GetWorld(), CameraLocation, CameraRotation, 90.0f, 2.0f, FColor::Red, true);
+	//DrawDebugCamera(GetWorld(), CameraLocation, CameraRotation, 90.0f, 2.0f, FColor::Red, true);
 	FCollisionQueryParams Params;
 	Params.AddIgnoredActor(this);
 	Params.AddIgnoredActor(GetOwner());

@@ -15,7 +15,7 @@ class BULLETSPONGE_API ABulletSpongePlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	//virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
+	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
 protected:
 	virtual void BeginPlay() override;
