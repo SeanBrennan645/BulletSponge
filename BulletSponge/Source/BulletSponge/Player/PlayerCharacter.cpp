@@ -3,6 +3,7 @@
 
 #include "PlayerCharacter.h"
 #include "BulletSponge/Weapons/GunBase.h"
+#include "BulletSponge/KillEmAllGameMode.h"
 #include "Components/CapsuleComponent.h"
 
 
@@ -100,6 +101,16 @@ float APlayerCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const
 		//UE_LOG(LogTemp, Warning, TEXT("Player Health is %f"), Health);
 
 		//add check if dead
+		if (IsDead())
+		{
+			AKillEmAllGameMode* GameMode = GetWorld()->GetAuthGameMode<AKillEmAllGameMode>();
+			if (GameMode != nullptr)
+			{
+				GameMode->PawnKilled(this);
+			}
+			DetachFromControllerPendingDestroy();
+			GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		}
 
 		return DamageToApply;
 	}

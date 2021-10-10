@@ -4,6 +4,7 @@
 #include "EnemyCharacter.h"
 #include "BulletSponge/Weapons/GunBase.h"
 #include "BulletSponge/Weapons/EnemyProjectile.h"
+#include "BulletSponge/KillEmAllGameMode.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -61,6 +62,16 @@ float AEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const&
 	UE_LOG(LogTemp, Warning, TEXT("Enemy health is %f"), Health);
 
 	//Need to add functionality for when enemy is dead
+	if (IsDead())
+	{
+		AKillEmAllGameMode* GameMode = GetWorld()->GetAuthGameMode<AKillEmAllGameMode>();
+		if (GameMode != nullptr)
+		{
+			GameMode->PawnKilled(this);
+		}
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 
 	return DamageToApply;
 }
