@@ -32,6 +32,9 @@ private:
 		UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
+		UParticleSystem* ImpactHit;
+
+	UPROPERTY(EditAnywhere)
 		float MaxRange = 1000.0f;
 
 	UPROPERTY(EditAnyWhere)

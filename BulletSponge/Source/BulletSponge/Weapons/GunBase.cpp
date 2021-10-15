@@ -70,8 +70,9 @@ void AGunBase::PullTrigger()
 	bool bSuccess = GunTrace(Hit, ShotDirection);
 	if (bSuccess)
 	{
-		DrawDebugPoint(GetWorld(), Hit.Location, 20.0f, FColor::Red, true);
+		//DrawDebugPoint(GetWorld(), Hit.Location, 20.0f, FColor::Red, true);
 		//Can add sounds and emitters for shot hit here
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactHit, Hit.Location, ShotDirection.Rotation());
 		
 		AActor* HitActor = Hit.GetActor();
 		if (HitActor != nullptr)
