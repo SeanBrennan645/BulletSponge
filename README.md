@@ -1,5 +1,5 @@
 # BulletSponge
- FPS Made in Unreal 4
+ FPS Made in Unreal 4 - Prototype available to download at https://genrely.itch.io/bulletsponge-prototype
 
 Asset Packs used but not included in commits to github are:  
 
